@@ -1,0 +1,61 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Apr 29 11:44:59 2021
+
+@author: sadrachpierre
+"""
+#define inputs
+import pandas as pd 
+
+df_telco = ''
+
+df_telco['TotalCharges']= pd.to_numeric(df_telco['TotalCharges'], errors='coerce')
+df_telco['TotalCharges'].fillna(df_telco['TotalCharges'].mean(), inplace=True)
+
+
+
+
+  
+import pandas as pd
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+df_churn = pd.read_csv('telco_churn.csv')
+df_churn = df_churn[['gender', 'PaymentMethod', 'MonthlyCharges', 'tenure', 'Churn']].copy()
+
+print(set(df_churn['MonthlyCharges']))
+print(df_churn.head())
+# Ordinal feature encoding
+# https://www.kaggle.com/pratik1120/penguin-dataset-eda-classification-and-clustering
+df = df_churn.copy()
+df.fillna(0, inplace=True)
+target = 'Churn'
+encode = ['gender','PaymentMethod']
+
+for col in encode:
+    dummy = pd.get_dummies(df[col], prefix=col)
+    df = pd.concat([df,dummy], axis=1)
+    del df[col]
+
+target_mapper = {'No':0, 'Yes':1,}
+def target_encode(val):
+    return target_mapper[val]
+
+df['Churn'] = df['Churn'].apply(target_encode)
+
+# Separating X and y
+
+X = df.drop('Churn', axis=1)
+Y = df['Churn']
+
+
+
+print(X.columns)
+# Build random forest model
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier()
+clf.fit(X, Y)
+
+# Saving the model
+import pickle
+pickle.dump(clf, open('churn_clf.pkl', 'wb'))
