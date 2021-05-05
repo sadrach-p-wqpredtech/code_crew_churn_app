@@ -1,3 +1,4 @@
+python-3.9.4
 streamlit==0.76.0
 pandas==1.0.1
 numpy==1.20.2
