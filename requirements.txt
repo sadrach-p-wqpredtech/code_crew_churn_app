@@ -1,3 +1,4 @@
+heroku create --buildpack https://github.com/dbrgn/heroku-buildpack-python-sklearn/
 streamlit==0.76.0
 numpy==1.20.2
 scikit-learn==0.21.3
