@@ -7,10 +7,13 @@ Created on Thu Apr 29 11:47:57 2021
 """
 
 import streamlit as st
-import pandas as pd
+#import pandas as pd
 import numpy as np
 import pickle
 
+print("Hello")
+
+'''
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 
@@ -105,3 +108,4 @@ st.write(churn_labels[prediction])
 
 st.subheader('Prediction Probability')
 st.write(prediction_proba)
+'''
