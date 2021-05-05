@@ -27,7 +27,37 @@ where churn mean the customer does not make another purchase after a period of t
 st.sidebar.header('User Input Features')
 
 
+df_selected = pd.read_csv("telco_churn.csv")
+df_selected['target'] = np.where(df_selected['Churn']=='Yes', 1, 0)
+df_selected['gender'] = np.where(df_selected['gender']=='Female', 1, 0)
+df_selected['Partner'] = np.where(df_selected['Partner']=='Yes', 1, 0)
+df_selected['Dependents'] = np.where(df_selected['Dependents']=='Yes', 1, 0)
+df_selected['PhoneService'] = np.where(df_selected['PhoneService']=='Yes', 1, 0)
 
+df_selected_all = df_selected[['gender', 'Partner', 'Dependents', 'PhoneService', 
+                                     'tenure', 'MonthlyCharges', 'target']].copy()
+
+def filedownload(df):
+    csv = df.to_csv(index=False)
+    b64 = base64.b64encode(csv.encode()).decode()  # strings <-> bytes conversions
+    href = f'<a href="data:file/csv;base64,{b64}" download="playerstats.csv">Download CSV File</a>'
+    return href
+
+st.set_option('deprecation.showPyplotGlobalUse', False)
+st.markdown(filedownload(df_selected_all), unsafe_allow_html=True)
+
+# Heatmap
+if st.button('Intercorrelation Heatmap'):
+    st.header('Intercorrelation Matrix Heatmap')
+    df_selected_all.to_csv('output.csv',index=False)
+    df = pd.read_csv('output.csv')
+
+    corr = df.corr()
+    with sns.axes_style("white"):
+        f, ax = plt.subplots(figsize=(7, 5))
+        ax = sns.heatmap(corr, cmap="Blues", annot=True)
+    st.pyplot()
+      
 
 
 # Collects user input features into dataframe
