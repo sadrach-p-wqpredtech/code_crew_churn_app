@@ -67,7 +67,7 @@ if st.button('Intercorrelation Heatmap'):
         f, ax = plt.subplots(figsize=(7, 5))
         ax = sns.heatmap(corr, cmap="Blues", annot=True)
     st.pyplot()
-      
+    
 
 
 # Collects user input features into dataframe
