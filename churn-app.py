@@ -57,8 +57,8 @@ st.markdown(filedownload(df_selected_all), unsafe_allow_html=True)
 if st.button('Intercorrelation Heatmap'):
     st.header('Intercorrelation Matrix Heatmap')
     st.write("""Correlation heatmaps are a great way to visualize, not only the relationship betwen input variables, but also the relationship
-     between our inputs and our target. This can help with identifying which input fatures most strongly influence an outcome. In our heatmap
-     we se that there is a strong negative relationship between tenure and churn and a strong positive relationship between MonthlyCharges and churn.""")
+     between our inputs and our target. This can help with identifying which input features most strongly influence an outcome. In our heatmap
+     we see that there is a strong negative relationship between tenure and churn and a strong positive relationship between MonthlyCharges and churn.""")
     df_selected_all.to_csv('output.csv',index=False)
     df = pd.read_csv('output.csv')
 
