@@ -47,7 +47,7 @@ df_selected_all = df_selected[['gender', 'Partner', 'Dependents', 'PhoneService'
 def filedownload(df):
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()  # strings <-> bytes conversions
-    href = f'<a href="data:file/csv;base64,{b64}" download="playerstats.csv">Download CSV File</a>'
+    href = f'<a href="data:file/csv;base64,{b64}" download="churn_data.csv">Download CSV File</a>'
     return href
 
 st.set_option('deprecation.showPyplotGlobalUse', False)
@@ -58,7 +58,7 @@ if st.button('Intercorrelation Heatmap'):
     st.header('Intercorrelation Matrix Heatmap')
     st.write("""Correlation heatmaps are a great way to visualize, not only the relationship betwen input variables, but also the relationship
      between our inputs and our target. This can help with identifying which input fatures most strongly influence an outcome. In our heatmap
-     we se that there is a strong negative relationship between tenure and churn and a strong positive relationship between MonthlyCharges and churn."""
+     we se that there is a strong negative relationship between tenure and churn and a strong positive relationship between MonthlyCharges and churn.""")
     df_selected_all.to_csv('output.csv',index=False)
     df = pd.read_csv('output.csv')
 
