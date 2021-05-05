@@ -1,5 +1,7 @@
 mkdir -p ~/.streamlit/
 
+heroku create --buildpack https://github.com/thenovices/heroku-buildpack-scipy
+
 echo "\
 [server]\n\
 port = $PORT\n\
