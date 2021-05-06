@@ -78,8 +78,8 @@ else:
     def user_input_features():
         gender = st.sidebar.selectbox('gender',('Male','Female'))
         PaymentMethod = st.sidebar.selectbox('PaymentMethod',('Bank transfer (automatic)', 'Credit card (automatic)', 'Mailed check', 'Electronic check'))
-        MonthlyCharges = st.sidebar.slider('Monthly Charges', 18.0,118.0,10.0)
-        tenure = st.sidebar.slider('tenure', 0.0,72.0,10.0)
+        MonthlyCharges = st.sidebar.slider('Monthly Charges', 18.0,118.0, 18.0)
+        tenure = st.sidebar.slider('tenure', 0.0,72.0, 0.0)
 
         data = {'gender':[gender], 
                 'PaymentMethod':[PaymentMethod], 
