@@ -78,8 +78,8 @@ else:
     def user_input_features():
         gender = st.sidebar.selectbox('gender',('Male','Female'))
         PaymentMethod = st.sidebar.selectbox('PaymentMethod',('Bank transfer (automatic)', 'Credit card (automatic)', 'Mailed check', 'Electronic check'))
-        MonthlyCharges = st.sidebar.slider('Monthly Charges', 32.1,59.6,43.9)
-        tenure = st.sidebar.slider('tenure', 13.1,21.5,17.2)
+        MonthlyCharges = st.sidebar.slider('Monthly Charges', 18.0,118.0,10.0)
+        tenure = st.sidebar.slider('tenure', 0.0,72.0,10.0)
 
         data = {'gender':[gender], 
                 'PaymentMethod':[PaymentMethod], 
@@ -90,8 +90,7 @@ else:
         return features
     input_df = user_input_features()
 
-# Combines user input features with entire penguins dataset
-# This will be useful for the encoding phase
+
 churn_raw = pd.read_csv('telco_churn.csv')
 
 
@@ -103,8 +102,7 @@ df = pd.concat([input_df,churn],axis=0)
 
 
 
-# Encoding of ordinal features
-# https://www.kaggle.com/pratik1120/penguin-dataset-eda-classification-and-clustering
+
 encode = ['gender','PaymentMethod']
 for col in encode:
     dummy = pd.get_dummies(df[col], prefix=col)
